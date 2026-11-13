@@ -387,7 +387,7 @@ var CATALOGO=[['Coxinha','salgados'],['Bolinha de queijo','salgados'],['Kibe','s
 function slug(s){return norm(s).replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,100)}
 var DEFAULT_SETOR={};CATALOGO.forEach(function(p){DEFAULT_SETOR[slug(p[0])]=p[1]});
 /* Ajustes rápidos: período do evento e limites dos avisos da conferência */
-var EVENT_START='2026-12-23',EVENT_END='2026-12-31',LIM_UN=300,LIM_KG=30,HORA_MIN='06:00',HORA_MAX='22:00';
+var LIM_UN=300,LIM_KG=30,HORA_MIN='06:00',HORA_MAX='22:00';
 function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 
@@ -883,7 +883,6 @@ var cfCtx=null;
 function closeConf(){var c=$('#cf');if(c)c.hidden=true;cfCtx=null}
 function warnings(d){
   var w=[],t=todayStr();
-  if(d.dataEntrega<EVENT_START||d.dataEntrega>EVENT_END)w.push('A data de entrega ('+fmtDay(d.dataEntrega)+') está fora do período de 23/12 a 31/12.');
   if(d.dataPedido&&d.dataPedido>d.dataEntrega)w.push('A data do pedido é depois da data de entrega.');
   if(d.dataPedido&&d.dataPedido>t)w.push('A data do pedido está no futuro.');
   var n=digits(d.telefone).length;
